@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<topology xmlns="http://www.cisco.com/VIRL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="0.95" xsi:schemaLocation="http://www.cisco.com/VIRL https://raw.github.com/CiscoVIRL/schema/v0.95/virl.xsd">
+    <extensions>
+        <entry key="management_network" type="String">user</entry>
+        <entry key="AutoNetkit.enable_cdp" type="Boolean">true</entry>
+        <entry key="AutoNetkit.IGP" type="String">isis</entry>
+        <entry key="AutoNetkit.enable_routing" type="Boolean">false</entry>
+    </extensions>
+    <node name="nx-osv9000-1" type="SIMPLE" subtype="NX-OSv 9000" location="281,89" ipv4="192.168.0.1">
+        <extensions>
+            <entry key="config" type="string">! NX-OSv Config generated on 2018-11-21 19:29
+! by autonetkit_0.24.0
+!
+version 6.2(1)
+license grace-period
+!
+hostname nx-osv9000-1
+vdc nx-osv9000-1 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 768
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+
+
+username adminbackup password 5 ! role network-operator
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1 role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00 role network-admin
+no password strength-check
+ip domain-lookup
+copp profile strict
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+snmp-server user cisco network-admin
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+
+vlan 1
+
+vrf context management
+hardware forwarding unicast trace
+
+interface Loopback0
+  description Loopback
+  ip address 192.168.0.1/32
+
+interface Ethernet1/1
+  description to nx-osv9000-2
+  no switchport
+  ip address 10.0.0.9/30
+  mac-address fa16.3e00.0001
+  no shutdown
+
+interface Ethernet1/2
+  description to nx-osv9000-2
+  no switchport
+  ip address 10.0.0.13/30
+  mac-address fa16.3e00.0002
+  no shutdown
+
+interface Ethernet1/3
+  description to nx-osv9000-2
+  no switchport
+  ip address 10.0.0.17/30
+  mac-address fa16.3e00.0003
+  no shutdown
+
+interface Ethernet1/4
+  description to nx-osv9000-2
+  no switchport
+  ip address 10.0.0.21/30
+  mac-address fa16.3e00.0004
+  no shutdown
+
+interface Ethernet1/5
+  description to iosvl2-1
+  no switchport
+  ip address 10.0.0.5/30
+  mac-address fa16.3e00.0005
+  no shutdown
+
+interface mgmt0
+  description OOB Management
+  ! Configured on launch
+  no ip address
+  mac-address fa16.3e00.0006
+  no shutdown
+  vrf member management
+
+
+line console
+line vty
+        </entry>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.0.0.9" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.0.0.13" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet1/3" ipv4="10.0.0.17" netPrefixLenV4="30"/>
+        <interface id="3" name="Ethernet1/4" ipv4="10.0.0.21" netPrefixLenV4="30"/>
+        <interface id="4" name="Ethernet1/5" ipv4="10.0.0.5" netPrefixLenV4="30"/>
+    </node>
+    <node name="nx-osv9000-2" type="SIMPLE" subtype="NX-OSv 9000" location="492,86" ipv4="192.168.0.2">
+        <extensions>
+            <entry key="config" type="string">! NX-OSv Config generated on 2018-11-21 19:29
+! by autonetkit_0.24.0
+!
+version 6.2(1)
+license grace-period
+!
+hostname nx-osv9000-2
+vdc nx-osv9000-2 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 768
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+
+
+username adminbackup password 5 ! role network-operator
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1 role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00 role network-admin
+no password strength-check
+ip domain-lookup
+copp profile strict
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+snmp-server user cisco network-admin
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+
+vlan 1
+
+vrf context management
+hardware forwarding unicast trace
+
+interface Loopback0
+  description Loopback
+  ip address 192.168.0.2/32
+
+interface Ethernet1/1
+  description to nx-osv9000-1
+  no switchport
+  ip address 10.0.0.10/30
+  mac-address fa16.3e00.0007
+  no shutdown
+
+interface Ethernet1/2
+  description to nx-osv9000-1
+  no switchport
+  ip address 10.0.0.14/30
+  mac-address fa16.3e00.0008
+  no shutdown
+
+interface Ethernet1/3
+  description to nx-osv9000-1
+  no switchport
+  ip address 10.0.0.18/30
+  mac-address fa16.3e00.0009
+  no shutdown
+
+interface Ethernet1/4
+  description to nx-osv9000-1
+  no switchport
+  ip address 10.0.0.22/30
+  mac-address fa16.3e00.000a
+  no shutdown
+
+interface Ethernet1/5
+  description to iosvl2-1
+  no switchport
+  ip address 10.0.0.6/30
+  mac-address fa16.3e00.000b
+  no shutdown
+
+interface mgmt0
+  description OOB Management
+  ! Configured on launch
+  no ip address
+  mac-address fa16.3e00.000c
+  no shutdown
+  vrf member management
+
+
+line console
+line vty
+        </entry>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.0.0.10" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.0.0.14" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet1/3" ipv4="10.0.0.18" netPrefixLenV4="30"/>
+        <interface id="3" name="Ethernet1/4" ipv4="10.0.0.22" netPrefixLenV4="30"/>
+        <interface id="4" name="Ethernet1/5" ipv4="10.0.0.6" netPrefixLenV4="30"/>
+    </node>
+    <node name="iosvl2-1" type="SIMPLE" subtype="IOSvL2" location="377,232">
+        <extensions>
+            <entry key="config" type="string">! IOSvL2 Config generated on 2018-11-21 19:29
+! by autonetkit_0.24.0
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+!
+line vty 0 4
+transport input ssh telnet
+exec-timeout 720 0
+password cisco
+login
+!
+line con 0
+password cisco
+!
+hostname iosvl2-1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+vtp domain virl.lab
+vtp mode transparent
+!
+vlan 2
+  name ank_vlan2
+!
+!
+!
+!
+cdp run
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+vrf definition Mgmt-intf
+!
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+!
+!
+!
+!
+interface Loopback0
+  description Loopback
+!
+interface GigabitEthernet0/0
+  description OOB management
+  ! Configured on launch
+  no switchport
+  vrf forwarding Mgmt-intf
+  no ip address
+  no shutdown
+!
+interface GigabitEthernet0/1
+  description to nx-osv9000-1
+  switchport access vlan 2
+  switchport mode access
+  no shutdown
+!
+interface GigabitEthernet0/2
+  description to nx-osv9000-2
+  switchport access vlan 2
+  switchport mode access
+  no shutdown
+!
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+end
+        </entry>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+        <interface id="1" name="GigabitEthernet0/2"/>
+    </node>
+    <annotations/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[2]" src="/virl:topology/virl:node[1]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[3]" src="/virl:topology/virl:node[1]/virl:interface[3]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[4]" src="/virl:topology/virl:node[1]/virl:interface[4]"/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[5]"/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[5]"/>
+</topology>
